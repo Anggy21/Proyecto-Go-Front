@@ -1,10 +1,11 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import Header from './components/Header/Header'
-import Login from './views/Login/Login'
+import {hydrate, render} from 'react-dom'
+import App from './App';
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <Login/>
-  </StrictMode>,
-)
+
+const rootElement = document.getElementById('root');
+
+if (rootElement?.hasChildNodes()) {
+  hydrate(<App />, rootElement);
+} else {
+  render(<App />, rootElement);
+}

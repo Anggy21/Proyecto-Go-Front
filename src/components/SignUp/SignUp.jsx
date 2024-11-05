@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import loginRequest from "../../request/login"
+import { useNavigate } from 'react-router-dom';
+
 
 
 const SignUp = ({ onToggle }) => {
@@ -8,25 +10,33 @@ const SignUp = ({ onToggle }) => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate(); 
+
+  const navigatorHandler = (url) =>{
+    navigate(url)
+  }
 
   const handleRegister = (e) => {
     e.preventDefault();
-    // Lógica para registrar al usuario
+    signUp()
     console.log('Nuevo usuario:', email);
   };
 
-  const login = () => {
+  const signUp = () => {
     const user = {
       email,
       name, 
-      phone,
-      password,
-      confirmPassword
+      //phone,
+      password
     }
 
-    /*loginRequest(user, "/signUp").then(data =>{
-      if(data.ok) alert("Registro exitoso!")
-    })*/
+    loginRequest(user, "http://192.168.1.41:8080/signup").then(data =>{
+      if(data.ok) {
+        navigatorHandler('/ConfirmEmail')
+        console.log(data.json())
+      }
+        
+    })
     
     console.log(user);
   }
@@ -69,9 +79,9 @@ const SignUp = ({ onToggle }) => {
             placeholder="Confirmar contraseña"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            required
+            require
           />
-          <button type="submit" className="login-button" onClick={login}>Registrar</button>
+          <button type="submit" className="login-button" >Registrar</button>
         </form>
         <p className="register-prompt">
           ¿Ya tienes cuenta? <span onClick={onToggle}>Inicia sesión aquí</span>

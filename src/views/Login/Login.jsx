@@ -2,22 +2,21 @@ import React, { useState } from 'react';
 import SignIn from '../../components/SignIn/SignIn';
 import SignUp from '../../components/SignUp/SignUp';
 import './Login.scss';
-import logo from '../../images/campana.png';
-import logoFactura from '../../images/factura-mensual.png'
+import logoFactura from '../../assets/images/factura-mensual.png'
 
 const Login = () => {
   const [isRegister, setIsRegister] = useState(false);
-
+ 
   const toggleForm = () => {
     setIsRegister((prev) => !prev);
   };
+
 
   return (
     <div className="login">
 
       <div className='login left'>
         <div className="logo">
-          <img src={logo} alt="Campana Logo" />
           <h1>FACTURIFY</h1>
         </div>
 

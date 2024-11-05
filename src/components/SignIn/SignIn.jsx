@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import loginRequest from "../../request/login"
+import { useNavigate } from 'react-router-dom';
 
 
 const SignIn = ({ onToggle }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); 
+
+  const navigatorHandler = (url) =>{
+    navigate(url)
+  }
 
 
   const handleLogin = (e) => {
+    login()
     e.preventDefault();
     // Lógica para autenticar al usuario con email y contraseña
     console.log('Usuario:', email, 'Contraseña:', password);
@@ -16,7 +23,7 @@ const SignIn = ({ onToggle }) => {
 
   const handleGoogleSuccess = (response) => {
     console.log('Google Login Success:', response);
-    // Lógica para manejar la autenticación de Google
+    navigatorHandler('/AddInvoice')
   };
 
   const handleGoogleFailure = (error) => {
@@ -29,10 +36,12 @@ const SignIn = ({ onToggle }) => {
       password
     }
 
-    /*loginRequest(user,"/login").then(data => {
+    loginRequest(user,"http://192.168.1.41:8080/login").then(data => {
       
-      if (data.ok) alert("Inicio de sesión exitoso")
-    })*/
+      if (data.ok){
+        navigatorHandler('/AddInvoice')
+      } 
+    })
 
     console.log(user);
   }
@@ -56,10 +65,10 @@ const SignIn = ({ onToggle }) => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit" className="login-button" onClick={login}>Ingresar</button>
+          <button type="submit" className="login-button">Ingresar</button>
         </form>
         <div className="divider">o</div>
-        <GoogleOAuthProvider clientId="TU_CLIENT_ID_DE_GOOGLE">
+        <GoogleOAuthProvider clientId="545261536035-qjhp65jsu1g0r05ckl5uok25ticcvuh6.apps.googleusercontent.com">
           <GoogleLogin
             onSuccess={handleGoogleSuccess}
             onError={handleGoogleFailure}

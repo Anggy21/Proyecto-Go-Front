@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './AddInvoice.scss'
 
 const AgregarFactura = () => {
   const [factura, setFactura] = useState({
@@ -22,6 +23,10 @@ const AgregarFactura = () => {
     <div className="form-container">
       <h2>Agregar nueva factura</h2>
       <form onSubmit={handleSubmit}>
+        <div className='form-group'>
+          <label>Servicio</label>
+          <input type="text" />
+        </div>
         <div className="form-group">
           <label>Periodicidad</label>
           <select name="periodicidad" value={factura.periodicidad} onChange={handleChange}>
@@ -40,6 +45,10 @@ const AgregarFactura = () => {
             onChange={handleChange}
             placeholder="$0000"
           />
+        </div>
+        <div className='form-group'>
+        <label>Fecha de inicio</label>
+        <input type="date" name="start_date" />
         </div>
         <div className="form-group">
           <label>Fecha de vencimiento</label>

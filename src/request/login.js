@@ -9,6 +9,6 @@ const loginRequest = async (user,url)=>{
         body:JSON.stringify(user)
     });
 
-}
+};
 
 export default loginRequest;
