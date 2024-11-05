@@ -1,0 +1,138 @@
+$background-color: #faf9f8;
+$card-background: #ffffff;
+$text-color: #333333;
+$primary-color: #2b9d94;
+$secondary-color: #160054;
+$shadow-color: rgba(0, 0, 0, 0.1);
+$button-height: 40px;
+$card-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; 
+}
+
+.login {
+  display: flex;
+  height: 100vh;
+
+  &.left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: $primary-color;
+    color: #ffffff;
+    padding: 20px;
+
+    .logo {
+      display: flex;
+      align-items: flex-start; 
+      margin-top: 20px;
+
+      img {
+        width: 60px;
+        margin-bottom: 15px;
+      }
+
+      h1 {
+        font-size: 30px;
+        font-weight: bold;
+        color: #160054;
+      }
+    }
+
+    .logoFactura {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #faf9f8;
+
+      img {
+        width: 80%;
+        filter: drop-shadow(
+          0 0 10px rgba(0, 0, 0, .8)
+        );
+      }
+    }
+  }
+
+  &.right {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $background-color;
+
+    .login-card {
+      width: 100%;
+      max-width: 400px;
+      padding: 40px;
+      background-color: $card-background;
+      border-radius: 10px;
+      box-shadow: 0px 4px 12px $shadow-color;
+      text-align: center;
+
+      .login-title {
+        font-size: 24px;
+        color: $secondary-color;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+
+        input {
+          margin-bottom: 15px;
+          padding: 12px;
+          font-size: 16px;
+          border: 2px solid $primary-color;
+          border-radius: 8px;
+
+          &:focus {
+            outline: none;
+            border-color: darken($primary-color, 10%);
+          }
+        }
+
+        .login-button {
+          padding: 12px;
+          font-size: 16px;
+          color: #ffffff;
+          background-color: $primary-color;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+
+          &:hover {
+            background-color: darken($primary-color, 10%);
+          }
+        }
+      }
+
+      .divider {
+        margin: 15px 0;
+        color: $text-color;
+        font-size: 14px;
+      }
+
+      .register-prompt {
+        font-size: 14px;
+        color: $text-color;
+        margin-top: 15px;
+
+        span {
+          color: $secondary-color;
+          cursor: pointer;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+
