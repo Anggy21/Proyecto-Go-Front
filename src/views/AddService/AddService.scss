@@ -9,17 +9,27 @@ $shadow-color: rgba(0, 0, 0, 0.1);
 $highlight-color: #4da699;
 $placeholder-color: #b0b0b0;
 
-// General layout
+
+.layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden; 
+}
+
+
 .form-container {
+  flex-grow: 1;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
-  width: 400px;
+  width: 50%;
   box-shadow: 0px 4px 12px $shadow-color;
   margin: 20px auto;
+  height: 100%;
 
   h2 {
     color: $sidebar-bg-color;

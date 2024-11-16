@@ -92,6 +92,26 @@ html, body {
           }
         }
 
+        .password-requirements{
+          margin-top: 8px; 
+          font-size: 0.9rem;
+          color: #555;
+          background: #f9f9f9;
+          border-left: 4px solid $primary-color;
+          padding: 10px;
+          border-radius: 4px;
+          width: 100%; 
+          box-shadow: $card-shadow;
+          text-align: left;
+
+          ul {
+            list-style: none; 
+            padding: 0;
+          }
+
+        }
+
+      
         .login-button {
           padding: 12px;
           font-size: 16px;
@@ -128,5 +148,6 @@ html, body {
     }
   }
 }
+
 
 

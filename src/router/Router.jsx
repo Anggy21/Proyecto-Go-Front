@@ -1,7 +1,8 @@
-import AddInvoice from '../views/AddInvoice/AddInvoice' 
+import AddService from '../views/AddService/AddService' 
 import ConfirmEmail from '../views/ConfirmEmail/ConfirmEmail'
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import Login from '../views/Login/Login'
+import PaymentHistory from '../views/PaymentHistory/PaymentHistory'
 
 const Router = () =>{
     return (
@@ -9,8 +10,9 @@ const Router = () =>{
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Login/>}/>
-                    <Route path='/AddInvoice' element={<AddInvoice/>}></Route>
+                    <Route path='/AddService' element={<AddService/>}></Route>
                     <Route path='/ConfirmEmail' element={<ConfirmEmail/>}></Route>
+                    <Route path='/PaymentHistory' element={<PaymentHistory/>}></Route>
                 </Routes>
             </BrowserRouter>
         </div>

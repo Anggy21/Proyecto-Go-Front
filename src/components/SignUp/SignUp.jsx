@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import loginRequest from "../../request/login"
+import {authenticationRequest} from "../../request/login"
 import { useNavigate } from 'react-router-dom';
 
 
@@ -10,6 +10,8 @@ const SignUp = ({ onToggle }) => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPasswordRequirements, setShowPasswordRequirements] = useState(false);
+
   const navigate = useNavigate(); 
 
   const navigatorHandler = (url) =>{
@@ -18,8 +20,16 @@ const SignUp = ({ onToggle }) => {
 
   const handleRegister = (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
     signUp()
-    console.log('Nuevo usuario:', email);
+  };
+
+  const handlePhoneInput = (e) => {
+    const onlyNumbers = e.target.value.replace(/[^0-9]/g, "");
+    setPhone(onlyNumbers);
   };
 
   const signUp = () => {
@@ -30,10 +40,15 @@ const SignUp = ({ onToggle }) => {
       password
     }
 
-    loginRequest(user, "http://192.168.1.41:8080/signup").then(data =>{
+    authenticationRequest(user, "http://localhost:8080/signup").then(async data =>{
+      let newUserResponse = await data.json();
+
       if(data.ok) {
+        window.localStorage.user = JSON.stringify(newUserResponse.Data.user);
+        
         navigatorHandler('/ConfirmEmail')
-        console.log(data.json())
+      }else{
+        alert(newUserResponse.message)
       }
         
     })
@@ -64,24 +79,36 @@ const SignUp = ({ onToggle }) => {
             type="phone"
             placeholder="Número de teléfono"
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={handlePhoneInput}
             required
           />
-          <input
-            type="password"
-            placeholder="Contraseña"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+ 
+            <input
+              type="password"
+              placeholder="Contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <label className="password-requirements">
+                <ul>
+                  <li>Longitud minimo de 8</li>
+                  <li>Al menos una minúscula</li>
+                  <li>Al menos una mayúscula</li>
+                  <li>Debe contener números</li>
+                  <li>Debe contener caracteres especiales como.,!*/@#</li>
+                </ul>
+              </label>
+            
+       
           <input
             type="password"
             placeholder="Confirmar contraseña"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            require
+            required
           />
-          <button type="submit" className="login-button" >Registrar</button>
+          <button type="submit" className="login-button">Registrar</button>
         </form>
         <p className="register-prompt">
           ¿Ya tienes cuenta? <span onClick={onToggle}>Inicia sesión aquí</span>

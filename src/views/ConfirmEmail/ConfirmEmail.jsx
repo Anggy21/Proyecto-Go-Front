@@ -17,7 +17,7 @@ const ConfirmEmail = () => {
             email,
             code
         }
-        loginRequest(confirmation, 'http://192.168.1.41:8080/confirmEmail').then(data=>{
+        loginRequest(confirmation, 'http://localhost:8080/confirmEmail').then(data=>{
             if(data.ok){
                navigatorHandler("/AddInvoice")
             }

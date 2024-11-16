@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import loginRequest from "../../request/login"
-import { useNavigate } from 'react-router-dom';
+import {authenticationRequest} from "../../request/login"
+import { json, useNavigate } from 'react-router-dom';
 
 
 const SignIn = ({ onToggle }) => {
@@ -17,13 +17,32 @@ const SignIn = ({ onToggle }) => {
   const handleLogin = (e) => {
     login()
     e.preventDefault();
-    // Lógica para autenticar al usuario con email y contraseña
     console.log('Usuario:', email, 'Contraseña:', password);
   };
 
   const handleGoogleSuccess = (response) => {
-    console.log('Google Login Success:', response);
-    navigatorHandler('/AddInvoice')
+
+    console.log("response: ",response)
+
+    const credential = {
+      token: response.credential
+    }
+
+    console.log(response);
+    
+
+    authenticationRequest(credential, "http://localhost:8080/login").then(async data =>{
+      let credentialResponse = await data.json();
+      
+      if(data.ok){
+        window.localStorage.user = JSON.stringify(credentialResponse.Data.user);
+        window.localStorage.token = credentialResponse.Data.token;
+  
+        navigatorHandler('/AddService')
+      }else{
+        alert(credentialResponse.message)
+      }
+    })
   };
 
   const handleGoogleFailure = (error) => {
@@ -36,14 +55,20 @@ const SignIn = ({ onToggle }) => {
       password
     }
 
-    loginRequest(user,"http://192.168.1.41:8080/login").then(data => {
+    authenticationRequest(user,"http://localhost:8080/login").then( async data => {
       
+      let serverResponse = await data.json()
       if (data.ok){
-        navigatorHandler('/AddInvoice')
-      } 
+        
+        window.localStorage.user = JSON.stringify(serverResponse.Data.user);
+        window.localStorage.token = serverResponse.Data.token;
+        
+        navigatorHandler('/AddService')
+      }
+      else{
+        alert(serverResponse.message)
+      }
     })
-
-    console.log(user);
   }
 
   return (

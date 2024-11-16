@@ -1,14 +1,15 @@
-const loginRequest = async (user,url)=>{
+export const authenticationRequest = async (user,url)=>{
 
     return await fetch(url,{
         method:"POST",
         headers:{
             'Content-Type':"application/json",
-            'Accept':"application/json"
+            'Accept':"application/json",
+            
         },
         body:JSON.stringify(user)
     });
 
 };
 
-export default loginRequest;
+export default authenticationRequest
