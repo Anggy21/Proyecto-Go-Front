@@ -4,7 +4,7 @@ import loginRequest from '../../request/login'
 import {useNavigate} from 'react-router-dom';
 
 const ConfirmEmail = () => {
-    const [email, setEmail] = useState('');
+
     const [code, setCode] = useState('');
     const navigate = useNavigate()
 
@@ -14,31 +14,29 @@ const ConfirmEmail = () => {
 
     const confirmEmail = () =>{
         const confirmation = {
-            email,
+            email:window.localStorage.userEmail,
             code
         }
+
+        window.localStorage.removeItem("userEmail")
+
         loginRequest(confirmation, 'http://localhost:8080/confirmEmail').then(data=>{
             if(data.ok){
-               navigatorHandler("/AddInvoice")
+               navigatorHandler("/AddService")
             }
         })
     }
 
     return(
         <>
-          
-                <label htmlFor="">Correo</label>
-                <input type='email' onChange={(e)=> {setEmail(e.target.value)}}/>
                 <label htmlFor="">Código</label>
                 <input type="text"  onChange={(e)=> {setCode(e.target.value)}}/>
 
                 <button onClick={confirmEmail}>Confirmar</button>
-
-        
-        
         </>
     )
 }
+
 
 export default ConfirmEmail
 

@@ -43,9 +43,8 @@ const SignUp = ({ onToggle }) => {
     authenticationRequest(user, "http://localhost:8080/signup").then(async data => {
       let newUserResponse = await data.json();
 
-      if (data.ok) {
-        window.localStorage.user = JSON.stringify(newUserResponse.Data.user);
-
+      if(data.ok) {
+        window.localStorage.userEmail = email
         navigatorHandler('/ConfirmEmail')
       } else {
         alert(newUserResponse.message)

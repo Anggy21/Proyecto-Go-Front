@@ -27,7 +27,7 @@ const SignIn = ({ onToggle }) => {
 
     const credential = {
       token: response.credential
-    };
+    }
 
     authenticationRequest(credential, backendUrl + "/socialLogin").then(async data => {
       let credentialResponse = await data.json();

@@ -1,4 +1,4 @@
-export const authenticationRequest = async (user,url)=>{
+export const authenticationRequest = async (body,url)=>{
 
     return await fetch(url,{
         method:"POST",
@@ -7,7 +7,7 @@ export const authenticationRequest = async (user,url)=>{
             'Accept':"application/json",
             
         },
-        body:JSON.stringify(user)
+        body:JSON.stringify(body)
     });
 
 };
