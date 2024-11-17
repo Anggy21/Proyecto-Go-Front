@@ -44,8 +44,7 @@ const SignUp = ({ onToggle }) => {
       let newUserResponse = await data.json();
 
       if(data.ok) {
-        window.localStorage.user = JSON.stringify(newUserResponse.Data.user);
-        
+        window.localStorage.userEmail = email
         navigatorHandler('/ConfirmEmail')
       }else{
         alert(newUserResponse.message)

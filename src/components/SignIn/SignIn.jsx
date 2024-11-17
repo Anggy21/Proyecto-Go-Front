@@ -31,7 +31,7 @@ const SignIn = ({ onToggle }) => {
     console.log(response);
     
 
-    authenticationRequest(credential, "http://localhost:8080/login").then(async data =>{
+    authenticationRequest(credential, "http://localhost:8080/socialLogin").then(async data =>{
       let credentialResponse = await data.json();
       
       if(data.ok){
