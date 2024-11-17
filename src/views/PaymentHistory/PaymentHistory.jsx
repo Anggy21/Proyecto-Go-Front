@@ -1,6 +1,10 @@
 import "./PaymentHistory.scss";
+import React from "react";
+import { useState } from "react";
 
 const PaymentHistory = () => {
+
+  const [payments, setPayments] = useState([]);
 
   const datos = [
     {
