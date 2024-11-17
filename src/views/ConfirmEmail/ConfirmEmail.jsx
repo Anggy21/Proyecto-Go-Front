@@ -17,6 +17,9 @@ const ConfirmEmail = () => {
             email:window.localStorage.userEmail,
             code
         }
+
+        window.localStorage.removeItem("userEmail")
+
         loginRequest(confirmation, 'http://localhost:8080/confirmEmail').then(data=>{
             if(data.ok){
                navigatorHandler("/AddService")
