@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { authenticationRequest } from "../../request/login"
+import { authenticationRequest } from "../../services/authenticationRequest"
 import { useNavigate } from 'react-router-dom';
 
 const SignUp = ({ onToggle }) => {
