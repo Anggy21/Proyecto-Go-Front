@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import SignIn from '../../components/SignIn/SignIn';
 import SignUp from '../../components/SignUp/SignUp';
 import './Login.scss';
@@ -6,7 +6,7 @@ import logoFactura from '../../assets/images/factura-mensual.png'
 
 const Login = () => {
   const [isRegister, setIsRegister] = useState(false);
- 
+
   const toggleForm = () => {
     setIsRegister((prev) => !prev);
   };
@@ -28,7 +28,7 @@ const Login = () => {
       <div className='login right'>
         {isRegister ? <SignUp onToggle={toggleForm} /> : <SignIn onToggle={toggleForm} />}
       </div>
-      
+
     </div>
   );
 };

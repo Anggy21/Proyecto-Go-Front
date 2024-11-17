@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import {authenticationRequest} from "../../request/login"
-import { json, useNavigate } from 'react-router-dom';
-
+import { authenticationRequest } from "../../request/login"
+import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const SignIn = ({ onToggle }) => {
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
-  const navigatorHandler = (url) =>{
+  const navigatorHandler = (url) => {
     navigate(url)
-  }
-
+  };
 
   const handleLogin = (e) => {
     login()
@@ -22,7 +22,7 @@ const SignIn = ({ onToggle }) => {
 
   const handleGoogleSuccess = (response) => {
 
-    console.log("response: ",response)
+    console.log("response: ", response)
 
     const credential = {
       token: response.credential
@@ -33,13 +33,12 @@ const SignIn = ({ onToggle }) => {
 
     authenticationRequest(credential, "http://localhost:8080/socialLogin").then(async data =>{
       let credentialResponse = await data.json();
-      
-      if(data.ok){
+
+      if (data.ok) {
         window.localStorage.user = JSON.stringify(credentialResponse.Data.user);
         window.localStorage.token = credentialResponse.Data.token;
-  
         navigatorHandler('/AddService')
-      }else{
+      } else {
         alert(credentialResponse.message)
       }
     })
@@ -49,23 +48,23 @@ const SignIn = ({ onToggle }) => {
     console.error('Google Login Error:', error);
   };
 
-  const login = ()=>{
+  const login = () => {
     const user = {
       email,
       password
-    }
+    };
 
-    authenticationRequest(user,"http://localhost:8080/login").then( async data => {
-      
-      let serverResponse = await data.json()
-      if (data.ok){
-        
+    authenticationRequest(user, "http://localhost:8080/login").then(async data => {
+
+      let serverResponse = await data.json();
+      if (data.ok) {
+
         window.localStorage.user = JSON.stringify(serverResponse.Data.user);
         window.localStorage.token = serverResponse.Data.token;
-        
+
         navigatorHandler('/AddService')
       }
-      else{
+      else {
         alert(serverResponse.message)
       }
     })
@@ -107,6 +106,10 @@ const SignIn = ({ onToggle }) => {
     </div>
 
   );
+};
+
+SignIn.propTypes = {
+  onToggle: PropTypes.func
 };
 
 export default SignIn;

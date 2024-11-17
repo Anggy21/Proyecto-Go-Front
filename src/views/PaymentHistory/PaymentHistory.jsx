@@ -1,8 +1,39 @@
-import React from "react";
 import "./PaymentHistory.scss";
 
 const PaymentHistory = () => {
 
+  const datos = [
+    {
+      fechaCorte: "01/01/2021",
+      factura: "123456",
+      fechaPago: "01/01/2021",
+      monto: "$100.00",
+    },
+    {
+      fechaCorte: "01/02/2021",
+      factura: "123457",
+      fechaPago: "01/02/2021",
+      monto: "$200.00",
+    },
+    {
+      fechaCorte: "01/03/2021",
+      factura: "123458",
+      fechaPago: "01/03/2021",
+      monto: "$300.00",
+    },
+    {
+      fechaCorte: "01/04/2021",
+      factura: "123459",
+      fechaPago: "01/04/2021",
+      monto: "$400.00",
+    },
+    {
+      fechaCorte: "01/05/2021",
+      factura: "123460",
+      fechaPago: "01/05/2021",
+      monto: "$500.00",
+    },
+  ];
 
   return (
     <div className="historial-pagos">

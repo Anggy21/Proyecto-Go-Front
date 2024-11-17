@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import '../SideBar/SideBar.scss';
 
@@ -10,7 +10,7 @@ function SideBar() {
   };
 
   return (
-    <div className={`sidebar-container ${isOpen ? 'open' : ''}`}>
+    <div className={`sidebar-container ${ isOpen ? 'open' : '' }`}>
       {/* Icono de hamburguesa */}
       <div className="hamburger-menu" onClick={toggleMenu}>
         <span className="bar"></span>
@@ -19,7 +19,7 @@ function SideBar() {
       </div>
 
       {/* Menú lateral */}
-      <aside className={`sidebar ${isOpen ? 'show' : ''}`}>
+      <aside className={`sidebar ${ isOpen ? 'show' : '' }`}>
         <Link to="/AddService" className="sidebar-item">
           <span className="icon">🏠</span> Agregar nuevo servicio
         </Link>
@@ -30,7 +30,7 @@ function SideBar() {
           <span className="icon">💵</span> Ver Facturas
         </Link>
         <Link to="/reminders" className="sidebar-item">
-        <span className="icon">📊</span> Dashboard
+          <span className="icon">📊</span> Dashboard
         </Link>
         <Link to="/logout" className="sidebar-item">
           <span className="icon">🔄</span> Cerrar Sesión

@@ -1,11 +1,7 @@
-import {hydrate, render} from 'react-dom'
 import App from './App';
+import './App.scss';
 
-
-const rootElement = document.getElementById('root');
-
-if (rootElement?.hasChildNodes()) {
-  hydrate(<App />, rootElement);
-} else {
-  render(<App />, rootElement);
-}
+import { createRoot } from 'react-dom/client';
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(<App tab="home" />);
