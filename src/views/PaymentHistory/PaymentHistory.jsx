@@ -1,10 +1,41 @@
 import "./PaymentHistory.scss";
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import getNextPayments from "../../services/paymentsService";
+
 
 const PaymentHistory = () => {
 
   const [payments, setPayments] = useState([]);
+
+  useEffect(() => {
+    getPayments();
+  }, []);
+
+
+  const getPayments = async () => {
+
+    if (window.localStorage.getItem("token") === null) {
+      return;
+    }
+
+    const token = window.localStorage.getItem("token");
+
+    console.log(token);
+    
+  
+    const response = await getNextPayments(token);
+
+    console.log(response);
+    
+
+    if (response.ok) {
+      setPayments(response.Data.payments);
+    } else {
+      alert(response.message);
+    }
+
+  };
 
   const datos = [
     {
