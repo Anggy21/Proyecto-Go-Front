@@ -92,11 +92,11 @@ body {
         }
 
         .password-requirements {
-          margin-top: 8px;
+          margin-bottom: 15px;
           font-size: 0.9rem;
           color: #555;
           background: #f9f9f9;
-          border-left: 4px solid $primary-color;
+          border-left: 4px solid red;
           padding: 10px;
           border-radius: 4px;
           width: 100%;
@@ -110,6 +110,18 @@ body {
 
         }
 
+        .password-dont-match {
+          margin-bottom: 15px;
+          font-size: 0.9rem;
+          color: red;
+          background: #f9f9f9;
+          border-left: 4px solid red;
+          padding: 10px;
+          border-radius: 4px;
+          width: 100%;
+          box-shadow: $card-shadow;
+          text-align: left;
+        }
 
         .login-button {
           padding: 12px;

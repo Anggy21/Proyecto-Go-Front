@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authenticationRequest } from "../../services/authenticationRequest"
-import './ConfirmEmail.scss'; // SCSS importado como módulo
-import logo from "../../../src/assets/images/factura-mensual.png"; // Imagen importada como módulo   
-
-
+import './ConfirmEmail.scss';
+import logo from "../../../src/assets/images/factura-mensual.png";
 const ConfirmEmail = () => {
+
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [code, setCode] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
@@ -27,7 +27,7 @@ const ConfirmEmail = () => {
 
         window.localStorage.removeItem('userEmail');
 
-        authenticationRequest(confirmation, 'http://localhost:8080/confirmEmail')
+        authenticationRequest(confirmation, backendUrl + '/confirmEmail')
             .then((data) => {
                 if (data.ok) {
                     navigatorHandler('/');
