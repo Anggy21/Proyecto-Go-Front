@@ -18,12 +18,9 @@ const SignIn = ({ onToggle }) => {
   const handleLogin = (e) => {
     login()
     e.preventDefault();
-    console.log('Usuario:', email, 'Contraseña:', password);
   };
 
   const handleGoogleSuccess = (response) => {
-
-    console.log("response: ", response)
 
     const credential = {
       token: response.credential
