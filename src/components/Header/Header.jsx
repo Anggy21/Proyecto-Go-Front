@@ -19,6 +19,9 @@ function Header() {
 
       {notificationsVisible && (
         <div className="notifications-dropdown">
+          {/* Add close button here */}
+          <button className="close-button" onClick={toggleNotifications} />
+          <span role="img" aria-label="close">❌</span>
           <p>Tienes nuevas notificaciones.</p>
           {/* Aquí puedes agregar una lista de notificaciones si lo deseas */}
         </div>

@@ -1,9 +1,5 @@
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
-
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -12,14 +8,13 @@
 
   .header-title {
     display: flex;
-    align-items: center; 
+    align-items: center;
     font-size: 1em;
     font-weight: bold;
     color: #160054;
-    margin: 0;
 
     h1 {
-      margin-right: 10px; 
+      margin-right: 10px;
     }
 
     .notification {
@@ -30,18 +25,17 @@
       position: relative;
       transition: color 0.3s ease;
       width: 80%;
-        filter: drop-shadow(
-          0 0 10px rgba(218, 119, 15, 0.8));
+      filter: drop-shadow(0 0 10px rgba(218, 119, 15, 0.8));
 
       &:hover {
-        color: #2b9d94; 
+        color: #2b9d94;
       }
     }
   }
 
   .notifications-dropdown {
     position: absolute;
-    top: 100px; 
+    top: 100px;
     right: 0;
     background-color: #fff;
     padding: 10px;

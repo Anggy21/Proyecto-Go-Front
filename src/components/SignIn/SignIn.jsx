@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 const SignIn = ({ onToggle }) => {
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ const SignIn = ({ onToggle }) => {
       token: response.credential
     };
 
-    authenticationRequest(credential, "http://localhost:8080/socialLogin").then(async data => {
+    authenticationRequest(credential, backendUrl + "/socialLogin").then(async data => {
       let credentialResponse = await data.json();
 
       if (data.ok) {
@@ -51,7 +52,7 @@ const SignIn = ({ onToggle }) => {
       password
     };
 
-    authenticationRequest(user, "http://localhost:8080/login").then(async data => {
+    authenticationRequest(user, backendUrl + "/login").then(async data => {
 
       let serverResponse = await data.json();
       if (data.ok) {
@@ -88,14 +89,14 @@ const SignIn = ({ onToggle }) => {
           />
           <button type="submit" className="login-button">Ingresar</button>
         </form>
-        {/* <div className="divider">o</div>
+        <div className="divider">o</div>
         <GoogleOAuthProvider clientId="545261536035-qjhp65jsu1g0r05ckl5uok25ticcvuh6.apps.googleusercontent.com">
           <GoogleLogin
             onSuccess={handleGoogleSuccess}
             onError={handleGoogleFailure}
             theme="outline"
           />
-        </GoogleOAuthProvider> */}
+        </GoogleOAuthProvider>
         <p className="register-prompt">
           ¿No tienes cuenta? <span onClick={onToggle}>Regístrate aquí</span>
         </p>

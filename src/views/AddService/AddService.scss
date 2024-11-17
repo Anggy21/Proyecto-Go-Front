@@ -9,16 +9,13 @@ $shadow-color: rgba(0, 0, 0, 0.1);
 $highlight-color: #4da699;
 $placeholder-color: #b0b0b0;
 
-
 .layout {
   display: flex;
   height: 100vh;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
-
 .form-container {
-  flex-grow: 1;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -27,7 +24,6 @@ $placeholder-color: #b0b0b0;
   padding: 20px;
   border-radius: 8px;
   width: 50%;
-  box-shadow: 0px 4px 12px $shadow-color;
   margin: 20px auto;
   height: 100%;
 
@@ -35,18 +31,15 @@ $placeholder-color: #b0b0b0;
     color: $sidebar-bg-color;
     font-size: 1.5em;
     margin-bottom: 10px;
-    border-bottom: 1px solid #d3d3d3;
     padding-bottom: 10px;
   }
 }
 
-// Form styles
 .form-group {
-  margin-bottom: 15px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 100%;
 
   label {
     font-weight: bold;
@@ -54,33 +47,38 @@ $placeholder-color: #b0b0b0;
     margin-bottom: 5px;
   }
 
-  input,
-  select {
-    width: 100%;
+  input {
+    width: 200px;
     padding: 10px;
     border: 1px solid $input-border-color;
     border-radius: 5px;
     font-size: 1em;
     color: $input-border-color;
-    outline: none;
 
     &::placeholder {
       color: $placeholder-color;
     }
   }
 
-  // Custom select field
   select {
-    appearance: none; // Remove default select arrow
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDE2IDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTggTDkgNEgxNkwxMS4zOTI5IDRMOC44MDcgOGwtLjkxMzUgMEwzIDRIMkwwIDhIMTRMOCiVIGNvbm5lY3RzPSJ1cm46czpiYXNlZG9uZTphMWEiLz48L3N2Zz4='); // SVG arrow icon
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    padding-right: 30px;
+    cursor: pointer;
+    width: 220px;
+    padding: 10px;
+    border: 1px solid $input-border-color;
+    border-radius: 5px;
+    font-size: 1em;
+    color: $input-border-color;
+
+    &::placeholder {
+      color: $placeholder-color;
+    }
   }
+
 }
 
 // Button style
 button {
+  margin-top: 20px;
   background-color: $button-bg-color;
   color: $text-color;
   border: none;
