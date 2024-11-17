@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../Header/Header.scss";
+import { getNotifications } from "../../services/notificationService";
 
 function Header() {
 
+  const token = window.localStorage.token;
   const [notifications, setNotifications] = useState([]);
   const [notificationsVisible, setNotificationsVisible] = useState(false);
+
+  useEffect(() => {
+    getNotifications(token).then((data) => {
+      setNotifications(data);
+    });
+  }, [token]);
 
   const toggleNotifications = () => {
     setNotificationsVisible(!notificationsVisible);
@@ -21,9 +29,14 @@ function Header() {
 
       {notificationsVisible && (
         <div className="notifications-dropdown">
-          <button className="close-button" onClick={toggleNotifications} >❌</button>
-          <p>Tienes nuevas notificaciones.</p>
-          {/* Aquí puedes agregar una lista de notificaciones si lo deseas */}
+          <button onClick={toggleNotifications} >❌</button>
+          {notifications === undefined
+            ? <p>No tienes nuevas notificaciones.</p>
+            : notifications.map((notification) => (
+              <div key={notification.id} className="notification-item">
+                <p>{notification.message}</p>
+              </div>
+            ))}
         </div>
       )}
     </header>

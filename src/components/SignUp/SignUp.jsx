@@ -1,25 +1,38 @@
 import { useState } from 'react';
 import { authenticationRequest } from "../../services/authenticationRequest"
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const SignUp = ({ onToggle }) => {
+
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPasswordRequirements, setShowPasswordRequirements] = useState(false);
+  const [showPasswordDontMatch, setShowPasswordDontMatch] = useState(false);
 
   const navigate = useNavigate();
 
   const navigatorHandler = (url) => {
     navigate(url)
-  }
+  };
+
+  const validatePasswordSecurity = (password) => {
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+    return passwordRegex.test(password);
+  };
 
   const handleRegister = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      alert("Las contraseñas no coinciden");
+      setShowPasswordDontMatch(true);
+      return;
+    }
+    if (!validatePasswordSecurity(password)) {
+      setShowPasswordRequirements(true);
       return;
     }
     signUp()
@@ -38,7 +51,7 @@ const SignUp = ({ onToggle }) => {
       password
     }
 
-    authenticationRequest(user, "http://localhost:8080/signup").then(async data => {
+    authenticationRequest(user, backendUrl + "/signup").then(async data => {
       let newUserResponse = await data.json();
 
       if (data.ok) {
@@ -49,9 +62,7 @@ const SignUp = ({ onToggle }) => {
       }
 
     })
-
-    console.log(user);
-  }
+  };
 
   return (
     <div className="login-container">
@@ -87,17 +98,6 @@ const SignUp = ({ onToggle }) => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <label className="password-requirements">
-            <ul>
-              <li>Longitud minimo de 8</li>
-              <li>Al menos una minúscula</li>
-              <li>Al menos una mayúscula</li>
-              <li>Debe contener números</li>
-              <li>Debe contener caracteres especiales como.,!*/@#</li>
-            </ul>
-          </label>
-
-
           <input
             type="password"
             placeholder="Confirmar contraseña"
@@ -105,6 +105,17 @@ const SignUp = ({ onToggle }) => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
+          {showPasswordDontMatch && <label className="password-dont-match">Las contraseñas no coinciden</label>}
+          {showPasswordRequirements && (
+            <label className="password-requirements">
+              <ul>
+                <li>Longitud minimo de 8</li>
+                <li>Al menos una minúscula</li>
+                <li>Al menos una mayúscula</li>
+                <li>Debe contener números</li>
+                <li>Debe contener caracteres especiales como.,!*/@#</li>
+              </ul>
+            </label>)}
           <button type="submit" className="login-button">Registrar</button>
         </form>
         <p className="register-prompt">
@@ -113,6 +124,10 @@ const SignUp = ({ onToggle }) => {
       </div>
     </div>
   );
+};
+
+SignUp.propTypes = {
+  onToggle: PropTypes.func.isRequired
 };
 
 export default SignUp;
