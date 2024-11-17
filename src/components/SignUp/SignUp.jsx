@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {authenticationRequest} from "../../request/login"
+import { useState } from 'react';
+import { authenticationRequest } from "../../request/login"
 import { useNavigate } from 'react-router-dom';
 
 
@@ -12,9 +12,9 @@ const SignUp = ({ onToggle }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPasswordRequirements, setShowPasswordRequirements] = useState(false);
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
-  const navigatorHandler = (url) =>{
+  const navigatorHandler = (url) => {
     navigate(url)
   }
 
@@ -35,24 +35,24 @@ const SignUp = ({ onToggle }) => {
   const signUp = () => {
     const user = {
       email,
-      name, 
+      name,
       //phone,
       password
     }
 
-    authenticationRequest(user, "http://localhost:8080/signup").then(async data =>{
+    authenticationRequest(user, "http://localhost:8080/signup").then(async data => {
       let newUserResponse = await data.json();
 
-      if(data.ok) {
+      if (data.ok) {
         window.localStorage.user = JSON.stringify(newUserResponse.Data.user);
-        
+
         navigatorHandler('/ConfirmEmail')
-      }else{
+      } else {
         alert(newUserResponse.message)
       }
-        
+
     })
-    
+
     console.log(user);
   }
 
@@ -82,25 +82,25 @@ const SignUp = ({ onToggle }) => {
             onChange={handlePhoneInput}
             required
           />
- 
-            <input
-              type="password"
-              placeholder="Contraseña"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <label className="password-requirements">
-                <ul>
-                  <li>Longitud minimo de 8</li>
-                  <li>Al menos una minúscula</li>
-                  <li>Al menos una mayúscula</li>
-                  <li>Debe contener números</li>
-                  <li>Debe contener caracteres especiales como.,!*/@#</li>
-                </ul>
-              </label>
-            
-       
+
+          <input
+            type="password"
+            placeholder="Contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <label className="password-requirements">
+            <ul>
+              <li>Longitud minimo de 8</li>
+              <li>Al menos una minúscula</li>
+              <li>Al menos una mayúscula</li>
+              <li>Debe contener números</li>
+              <li>Debe contener caracteres especiales como.,!*/@#</li>
+            </ul>
+          </label>
+
+
           <input
             type="password"
             placeholder="Confirmar contraseña"

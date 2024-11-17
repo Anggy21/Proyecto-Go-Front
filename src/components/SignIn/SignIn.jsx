@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import {authenticationRequest} from "../../request/login"
-import { json, useNavigate } from 'react-router-dom';
-
+import { authenticationRequest } from "../../request/login"
+import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const SignIn = ({ onToggle }) => {
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
-  const navigatorHandler = (url) =>{
+  const navigatorHandler = (url) => {
     navigate(url)
-  }
-
+  };
 
   const handleLogin = (e) => {
     login()
@@ -22,24 +22,20 @@ const SignIn = ({ onToggle }) => {
 
   const handleGoogleSuccess = (response) => {
 
-    console.log("response: ",response)
+    console.log("response: ", response)
 
     const credential = {
       token: response.credential
-    }
+    };
 
-    console.log(response);
-    
-
-    authenticationRequest(credential, "http://localhost:8080/login").then(async data =>{
+    authenticationRequest(credential, "http://localhost:8080/socialLogin").then(async data => {
       let credentialResponse = await data.json();
-      
-      if(data.ok){
+
+      if (data.ok) {
         window.localStorage.user = JSON.stringify(credentialResponse.Data.user);
         window.localStorage.token = credentialResponse.Data.token;
-  
         navigatorHandler('/AddService')
-      }else{
+      } else {
         alert(credentialResponse.message)
       }
     })
@@ -49,23 +45,23 @@ const SignIn = ({ onToggle }) => {
     console.error('Google Login Error:', error);
   };
 
-  const login = ()=>{
+  const login = () => {
     const user = {
       email,
       password
-    }
+    };
 
-    authenticationRequest(user,"http://localhost:8080/login").then( async data => {
-      
-      let serverResponse = await data.json()
-      if (data.ok){
-        
+    authenticationRequest(user, "http://localhost:8080/login").then(async data => {
+
+      let serverResponse = await data.json();
+      if (data.ok) {
+
         window.localStorage.user = JSON.stringify(serverResponse.Data.user);
         window.localStorage.token = serverResponse.Data.token;
-        
+
         navigatorHandler('/AddService')
       }
-      else{
+      else {
         alert(serverResponse.message)
       }
     })
@@ -92,14 +88,14 @@ const SignIn = ({ onToggle }) => {
           />
           <button type="submit" className="login-button">Ingresar</button>
         </form>
-        <div className="divider">o</div>
+        {/* <div className="divider">o</div>
         <GoogleOAuthProvider clientId="545261536035-qjhp65jsu1g0r05ckl5uok25ticcvuh6.apps.googleusercontent.com">
           <GoogleLogin
             onSuccess={handleGoogleSuccess}
             onError={handleGoogleFailure}
             theme="outline"
           />
-        </GoogleOAuthProvider>
+        </GoogleOAuthProvider> */}
         <p className="register-prompt">
           ¿No tienes cuenta? <span onClick={onToggle}>Regístrate aquí</span>
         </p>
@@ -107,6 +103,10 @@ const SignIn = ({ onToggle }) => {
     </div>
 
   );
+};
+
+SignIn.propTypes = {
+  onToggle: PropTypes.func
 };
 
 export default SignIn;
