@@ -20,7 +20,7 @@ function SideBar() {
 
       {/* Menú lateral */}
       <aside className={`sidebar ${ isOpen ? 'show' : '' }`}>
-        <Link to="/AddService" className="sidebar-item">
+        <Link to="/add-service" className="sidebar-item">
           <span className="icon">🏠</span> Agregar nuevo servicio
         </Link>
         <Link to="/payment-history" className="sidebar-item">

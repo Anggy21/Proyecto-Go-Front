@@ -1,5 +1,7 @@
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 const getNextPayments = async (idToken) => {
-    const response = await fetch('http://localhost:8080/GetNextPayments', {
+    const response = await fetch(backendUrl + '/GetNextPayments', {
         method: 'GET',
         headers: {
             'IdToken': idToken,
@@ -7,8 +9,8 @@ const getNextPayments = async (idToken) => {
             'Accept': 'application/json'
         }
     });
-
-    return await response.json();
-}
+    const data = await response.json();
+    return data.Data;
+};
 
 export default getNextPayments;

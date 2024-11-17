@@ -10,9 +10,9 @@ const Router = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Login />} />
-                    <Route path='/AddService' element={<AddService />}></Route>
-                    <Route path='/ConfirmEmail' element={<ConfirmEmail />}></Route>
-                    <Route path='/PaymentHistory' element={<PaymentHistory />}></Route>
+                    <Route path='/add-service' element={<AddService />}></Route>
+                    <Route path='/confirm-email' element={<ConfirmEmail />}></Route>
+                    <Route path='/view-invoices' element={<PaymentHistory />}></Route>
                 </Routes>
             </BrowserRouter>
         </div>

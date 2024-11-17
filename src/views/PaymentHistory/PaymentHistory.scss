@@ -1,8 +1,10 @@
 $primary-color: #00aaff;
 $primary-hover-color: #0088cc;
 $border-color: #ccc;
-$table-header-bg: #f4f4f4;
+$table-header-bg: #408fd0;
 $table-row-bg: #f9f9f9;
+$green-color: #2b9d94;
+$green-hover-color: #2c756f;
 
 .historial-pagos {
   text-align: center;
@@ -33,7 +35,7 @@ $table-row-bg: #f9f9f9;
   .tabla-container {
     margin: 20px auto;
     width: 90%;
-    max-width: 600px;
+    max-width: 1150px;
 
     h3 {
       margin-bottom: 10px;
@@ -47,11 +49,13 @@ $table-row-bg: #f9f9f9;
 
       th,
       td {
+        text-align: center;
         border: 1px solid $border-color;
         padding: 10px;
       }
 
       th {
+        text-align: center;
         background-color: $table-header-bg;
         font-weight: bold;
       }
@@ -60,6 +64,20 @@ $table-row-bg: #f9f9f9;
         tr:nth-child(odd) {
           background-color: $table-row-bg;
         }
+      }
+    }
+
+    .btn-pagar {
+      background-color: $green-color;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: $green-hover-color;
       }
     }
   }

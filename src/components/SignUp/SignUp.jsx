@@ -56,7 +56,7 @@ const SignUp = ({ onToggle }) => {
 
       if (data.ok) {
         window.localStorage.userEmail = email
-        navigatorHandler('/ConfirmEmail')
+        navigatorHandler('/confirm-email')
       } else {
         alert(newUserResponse.message)
       }

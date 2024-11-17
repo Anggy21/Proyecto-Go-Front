@@ -5,7 +5,7 @@ import { getNotifications } from "../../services/notificationService";
 function Header() {
 
   const token = window.localStorage.token;
-  const [notifications, setNotifications] = useState([]);
+  const [notifications, setNotifications] = useState(null);
   const [notificationsVisible, setNotificationsVisible] = useState(false);
 
   useEffect(() => {
@@ -24,22 +24,27 @@ function Header() {
         <h1>FACTURIFY</h1>
         <button className="notification" onClick={toggleNotifications} aria-label="Notificaciones">
           <span role="img" aria-label="bell">🔔</span>
+          {notifications !== null &&
+            <span className="notification-count">{notifications.length}</span>
+          }
         </button>
       </div>
 
-      {notificationsVisible && (
-        <div className="notifications-dropdown">
-          <button onClick={toggleNotifications} >❌</button>
-          {notifications === undefined
-            ? <p>No tienes nuevas notificaciones.</p>
-            : notifications.map((notification) => (
-              <div key={notification.id} className="notification-item">
-                <p>{notification.message}</p>
-              </div>
-            ))}
-        </div>
-      )}
-    </header>
+      {
+        notificationsVisible && (
+          <div className="notifications-dropdown">
+            <button onClick={toggleNotifications} >❌</button>
+            {notifications === undefined || notifications === null || notifications.length === 0
+              ? <p>No tienes nuevas notificaciones.</p>
+              : notifications.map((notification) => (
+                <div key={notification.id} className="notification-item">
+                  <p>{notification.message}</p>
+                </div>
+              ))}
+          </div>
+        )
+      }
+    </header >
   );
 }
 

@@ -28,6 +28,18 @@
       &:hover {
         color: #2b9d94;
       }
+
+      .notification-count {
+        margin-top: 30px;
+        margin-left: -50px;
+        height: 20px;
+        position: absolute;
+        background-color: red;
+        color: #fff;
+        border-radius: 50%;
+        padding: 3px 6px;
+        font-size: 0.5em;
+      }
     }
   }
 
