@@ -9,37 +9,25 @@ $shadow-color: rgba(0, 0, 0, 0.1);
 $highlight-color: #4da699;
 $placeholder-color: #b0b0b0;
 
-.layout {
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-}
-
 .form-container {
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 8px;
-  width: 50%;
+  overflow-y: auto;
   margin: 20px auto;
-  height: 100%;
 
   h2 {
     color: $sidebar-bg-color;
     font-size: 1.5em;
     margin-bottom: 10px;
-    padding-bottom: 10px;
   }
 }
 
 .form-group {
-  padding: 10px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 
   label {
     font-weight: bold;
@@ -50,6 +38,7 @@ $placeholder-color: #b0b0b0;
   input {
     width: 200px;
     padding: 10px;
+    margin-top: 10px;
     border: 1px solid $input-border-color;
     border-radius: 5px;
     font-size: 1em;
@@ -64,6 +53,7 @@ $placeholder-color: #b0b0b0;
     cursor: pointer;
     width: 220px;
     padding: 10px;
+    margin-top: 10px;
     border: 1px solid $input-border-color;
     border-radius: 5px;
     font-size: 1em;
@@ -74,23 +64,23 @@ $placeholder-color: #b0b0b0;
     }
   }
 
-}
+  // Button style
+  .form-group-button {
+    padding: 10px 30px;
+    margin-top: 30px;
+    background-color: $button-bg-color;
+    color: $text-color;
+    border: none;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 
-// Button style
-button {
-  margin-top: 20px;
-  background-color: $button-bg-color;
-  color: $text-color;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1em;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: $button-hover-bg-color;
+    &:hover {
+      background-color: $button-hover-bg-color;
+    }
   }
+
 }
 
 // Sidebar menu (left panel)

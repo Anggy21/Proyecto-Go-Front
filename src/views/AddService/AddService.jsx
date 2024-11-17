@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import SideBar from '../../components/SideBar/sideBar';
 import Header from '../../components/Header/Header';
 import './AddService.scss';
@@ -23,56 +23,52 @@ const AddService = () => {
   return (
     <>
       <Header />
-
-      <div className="layout">
-        <SideBar />
-
-        <div className="form-container">
-          <h2>Agregar nueva factura</h2>
-          <div className="form-group">
-            <label>Servicio</label>
-            <input type="text" />
-          </div>
-          <div className="form-group">
-            <label>Periodicidad</label>
-            <select name="periodicidad" value={factura.periodicidad} onChange={handleChange}>
-              <option value="">Seleccionar</option>
-              <option value="mensual">Mensual</option>
-              <option value="anual">Anual</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label>Monto</label>
-            <input
-              type="text"
-              name="monto"
-              value={factura.monto}
-              onChange={handleChange}
-              placeholder="$0000"
-            />
-          </div>
-          <div className="form-group">
-            <label>Fecha de inicio</label>
-            <input type="date" name="start_date" />
-          </div>
-          <div className="form-group">
-            <label>Fecha de vencimiento</label>
-            <input
-              type="date"
-              name="fechaVencimiento"
-              value={factura.fechaVencimiento}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label>Categoría</label>
-            <select name="categoria" value={factura.categoria} onChange={handleChange}>
-              <option value="">Seleccionar</option>
-              <option value="internet">Internet</option>
-              <option value="electricidad">Electricidad</option>
-            </select>
-          </div>
-          <button onClick={handleSubmit} type="submit">Añadir</button>
+      <SideBar />
+      <div className="form-container">
+        <h2>Agregar nueva factura</h2>
+        <div className="form-group">
+          <label>Servicio</label>
+          <input type="text" />
+        </div>
+        <div className="form-group">
+          <label>Periodicidad</label>
+          <select name="periodicidad" value={factura.periodicidad} onChange={handleChange}>
+            <option value="">Seleccionar</option>
+            <option value="mensual">Mensual</option>
+            <option value="anual">Anual</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <label>Monto</label>
+          <input
+            type="text"
+            name="monto"
+            value={factura.monto}
+            onChange={handleChange}
+            placeholder="$0000"
+          />
+        </div>
+        <div className="form-group">
+          <label>Fecha de inicio</label>
+          <input type="date" name="start_date" />
+        </div>
+        <div className="form-group">
+          <label>Fecha de vencimiento</label>
+          <input
+            type="date"
+            name="fechaVencimiento"
+            value={factura.fechaVencimiento}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label>Categoría</label>
+          <select name="categoria" value={factura.categoria} onChange={handleChange}>
+            <option value="">Seleccionar</option>
+            <option value="internet">Internet</option>
+            <option value="electricidad">Electricidad</option>
+          </select>
+          <button className="form-group-button" onClick={handleSubmit} type="submit">Añadir</button>
         </div>
       </div>
     </>

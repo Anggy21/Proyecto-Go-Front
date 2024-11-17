@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { authenticationRequest } from "../../request/login"
 import { useNavigate } from 'react-router-dom';
 
-
-
 const SignUp = ({ onToggle }) => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -43,7 +41,7 @@ const SignUp = ({ onToggle }) => {
     authenticationRequest(user, "http://localhost:8080/signup").then(async data => {
       let newUserResponse = await data.json();
 
-      if(data.ok) {
+      if (data.ok) {
         window.localStorage.userEmail = email
         navigatorHandler('/ConfirmEmail')
       } else {

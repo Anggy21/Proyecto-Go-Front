@@ -2,6 +2,8 @@ import { useState } from "react";
 import "../Header/Header.scss";
 
 function Header() {
+
+  const [notifications, setNotifications] = useState([]);
   const [notificationsVisible, setNotificationsVisible] = useState(false);
 
   const toggleNotifications = () => {
@@ -19,9 +21,7 @@ function Header() {
 
       {notificationsVisible && (
         <div className="notifications-dropdown">
-          {/* Add close button here */}
-          <button className="close-button" onClick={toggleNotifications} />
-          <span role="img" aria-label="close">❌</span>
+          <button className="close-button" onClick={toggleNotifications} >❌</button>
           <p>Tienes nuevas notificaciones.</p>
           {/* Aquí puedes agregar una lista de notificaciones si lo deseas */}
         </div>
