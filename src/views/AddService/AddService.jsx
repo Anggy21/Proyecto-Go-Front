@@ -1,21 +1,84 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import SideBar from '../../components/SideBar/sideBar';
 import Header from '../../components/Header/Header';
 import './AddService.scss';
+import { getDefaultCategories,getCategories } from '../../services/categoriesService';
+import createSubscription from '../../services/SubscriptionService';
 
 const AddService = () => {
-  const [factura, setFactura] = useState({
-    periodicidad: '',
-    monto: '',
-    fechaVencimiento: '',
-    categoria: ''
-  });
 
+  const [categories, setCategories] = useState([]);
+  const idToken = window.localStorage.getItem('token');
+  const [paymentFrequency, setPaymentFrequency] = useState('');
+  const [cost, setCost] = useState(0);
+  const [deadline, setDeadline] = useState(null);
+  const [categoryId, setCategoryId] = useState(0);
+  const [service, setService] = useState('');
+
+  useEffect(() => {
+    const allCategories = [];
+
+    getDefaultCategories().then((data) => {
+      allCategories.push(...data);
+      
+      getCategories(idToken).then((data) => {
+        if (data!=null)
+        allCategories.push(...data);
+
+        setCategories(allCategories)
+
+      });
+    });
+
+  }, [idToken]);
+
+ 
   const handleChange = (e) => {
-    setFactura({ ...factura, [e.target.name]: e.target.value });
+    switch (e.target.name) {
+      case 'service':
+        setService(e.target.value);
+        break;
+      case 'paymentFrequency':
+        setPaymentFrequency(e.target.value);
+        break;
+      case 'cost':
+        setCost(parseFloat(e.target.value));
+        break;
+      case 'deadline':
+        setDeadline(new Date(e.target.value).toISOString());
+        break;
+      case 'categoryId':
+        setCategoryId(parseInt(e.target.value));
+        break;
+      default:
+        break;
+    }
   };
 
   const handleSubmit = (e) => {
+    const subscription = {
+      service: service,
+      paymentFrequency: paymentFrequency,
+      cost: cost,
+      deadline: deadline,
+      categoryId: categoryId,
+      startTime: new Date().toISOString(),
+    };
+
+    console.log(subscription);
+
+    let subscriptionToSent = subscription;
+    console.log(subscriptionToSent);
+
+    createSubscription(subscriptionToSent,idToken).then((data) => {
+      if (data!==null) {
+        alert('Subscripción creada');
+        window.location.reload();
+      } else {
+        alert('Error al crear la subscripción');
+      }
+    });
+
     e.preventDefault();
   };
 
@@ -24,48 +87,46 @@ const AddService = () => {
       <Header />
       <SideBar />
       <div className="form-container">
-        <h2>Agregar nueva factura</h2>
+        <h2>Agregar nueva subscripción</h2>
         <div className="form-group">
           <label>Servicio</label>
-          <input type="text" />
+          <input type="text" name='service' onChange={handleChange} />
         </div>
         <div className="form-group">
           <label>Periodicidad</label>
-          <select name="periodicidad" value={factura.periodicidad} onChange={handleChange}>
+          <select name="paymentFrequency" onChange={handleChange}>
             <option value="">Seleccionar</option>
-            <option value="mensual">Mensual</option>
-            <option value="anual">Anual</option>
+            <option value="MONTHLY">Mensual</option>
+            <option value="YEARLY">Anual</option>
+            <option value="WEEKLY">Semanal</option>
           </select>
         </div>
         <div className="form-group">
-          <label>Monto</label>
+          <label>Costo</label>
           <input
             type="text"
-            name="monto"
-            value={factura.monto}
+            name="cost"
             onChange={handleChange}
             placeholder="$0000"
           />
         </div>
         <div className="form-group">
-          <label>Fecha de inicio</label>
-          <input type="date" name="start_date" />
-        </div>
-        <div className="form-group">
           <label>Fecha de vencimiento</label>
           <input
             type="date"
-            name="fechaVencimiento"
-            value={factura.fechaVencimiento}
+            name="deadline"
             onChange={handleChange}
           />
         </div>
         <div className="form-group">
           <label>Categoría</label>
-          <select name="categoria" value={factura.categoria} onChange={handleChange}>
-            <option value="">Seleccionar</option>
-            <option value="internet">Internet</option>
-            <option value="electricidad">Electricidad</option>
+          <select name="categoryId" onChange={handleChange}>
+            <option value="" disabled selected>Seleccionar</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
           </select>
           <button className="form-group-button" onClick={handleSubmit} type="submit">Añadir</button>
         </div>

@@ -32,7 +32,7 @@ const SignIn = ({ onToggle }) => {
       if (data.ok) {
         window.localStorage.user = JSON.stringify(credentialResponse.Data.user);
         window.localStorage.token = credentialResponse.Data.token;
-        navigatorHandler('/AddService')
+        navigatorHandler('/add-service')
       } else {
         alert(credentialResponse.message)
       }
@@ -57,7 +57,7 @@ const SignIn = ({ onToggle }) => {
         window.localStorage.user = JSON.stringify(serverResponse.Data.user);
         window.localStorage.token = serverResponse.Data.token;
 
-        navigatorHandler('/AddService')
+        navigatorHandler('/add-service')
       }
       else {
         alert(serverResponse.message)

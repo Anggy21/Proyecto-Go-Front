@@ -5,4 +5,16 @@ const formatCurrency = (value) => {
     }).format(value);
 };
 
-export { formatCurrency };
+const paymentStatus = {
+    "PENDING": "Pendiente",
+    "SUCCESS": "Pagado",
+    "CANCELED": "Cancelado",
+}
+
+const paymentFrequency = {
+    "MONTHLY": "Mensual",
+    "YEARLY": "Anual",
+    "WEEKLY": "Semanal",
+}
+
+export { formatCurrency,paymentStatus,paymentFrequency};

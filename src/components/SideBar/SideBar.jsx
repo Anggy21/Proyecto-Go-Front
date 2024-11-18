@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import '../SideBar/SideBar.scss';
+import { useNavigate } from "react-router-dom";
 
 function SideBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen); // Cambia el estado de apertura/cierre del menú
   };
+
 
   return (
     <div className={`sidebar-container ${ isOpen ? 'open' : '' }`}>
