@@ -81,6 +81,22 @@ $placeholder-color: #b0b0b0;
     }
   }
 
+  .form-group-add-category{
+    padding: 10px 30px;
+    margin-top: 10px;
+    background-color: $button-bg-color;
+    color: $text-color;
+    border: none;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $button-hover-bg-color;
+    }
+  }
+
 }
 
 // Sidebar menu (left panel)
