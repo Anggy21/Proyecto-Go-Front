@@ -7,14 +7,36 @@ function Header() {
   const token = window.localStorage.token;
   const [notifications, setNotifications] = useState(null);
   const [notificationsVisible, setNotificationsVisible] = useState(false);
+  const [notificationWasOpened, setNotificationWasOpened] = useState(false);
+  const notificationOpenedLocalStorage = window.localStorage.getItem("notificationOpened");
+  const notificationCount = window.localStorage.getItem("notificationCount");
+  const [newNotifications, setNewNotifications] = useState(0);
 
   useEffect(() => {
+    if (notificationOpenedLocalStorage === "true") {
+      setNotificationWasOpened(true);
+    }
+
     getNotifications(token).then((data) => {
       setNotifications(data);
+      checkNotifications(data);
+
     });
   }, [token]);
 
+  const checkNotifications = (data) => {
+    if(data.length > notificationCount){
+      window.localStorage.setItem("notificationOpened", "false");
+      setNewNotifications(data.length - notificationCount);
+      console.log(newNotifications);
+    }
+  }
+
   const toggleNotifications = () => {
+    if (notificationWasOpened === false) {
+      window.localStorage.setItem("notificationOpened", "true");
+    }
+    setNotificationWasOpened(true);
     setNotificationsVisible(!notificationsVisible);
   };
 
@@ -24,8 +46,8 @@ function Header() {
         <h1>FACTURIFY</h1>
         <button className="notification" onClick={toggleNotifications} aria-label="Notificaciones">
           <span role="img" aria-label="bell">🔔</span>
-          {notifications !== null &&
-            <span className="notification-count">{notifications.length}</span>
+          {notifications !== null && !notificationWasOpened &&
+            <span className="notification-count">{newNotifications}</span>
           }
         </button>
       </div>

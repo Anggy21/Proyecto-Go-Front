@@ -59,7 +59,10 @@ const AddService = () => {
   };
 
   const handleCreateCategory = () => {
-    if (newCategoryName.trim()) {
+    if (newCategoryName.trim()==="") {
+      return;
+    }
+
       createCategory(idToken,{name:newCategoryName}).then((data) => {
         if (data !== null) {
           alert('Categoría creada');
@@ -70,7 +73,7 @@ const AddService = () => {
           alert('Error al crear la categoría');
         }
       });
-    }
+    
   };
 
   const handleSubmit = (e) => {
@@ -78,7 +81,7 @@ const AddService = () => {
       service,
       paymentFrequency,
       cost,
-      deadline,
+      deadline:(""+deadline).split('T')[0] + "T00:00:00.000Z",
       categoryId,
       startTime: new Date().toISOString(),
     };

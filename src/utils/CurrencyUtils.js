@@ -9,6 +9,9 @@ const paymentStatus = {
     "PENDING": "Pendiente",
     "SUCCESS": "Pagado",
     "CANCELED": "Cancelado",
+    "ERROR": "Error",
+    'FAILED': "Fallido",
+    'OVERDUE': "Atrasado",
 }
 
 const paymentFrequency = {

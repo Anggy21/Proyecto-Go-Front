@@ -6,8 +6,7 @@ const logout = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        window.localStorage.removeItem("token");
-        window.localStorage.removeItem("user");
+        window.localStorage.clear();
         navigate('/');
     }, []);
 

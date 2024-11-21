@@ -1,5 +1,4 @@
 .sidebar-container {
-  position: relative;
 
   .hamburger-menu {
     display: flex;
@@ -8,13 +7,14 @@
     width: 30px;
     height: 25px;
     cursor: pointer;
-    z-index: 100;
-    position: fixed;
+    z-index: 99;
+    position: absolute;
     top: 20px;
     left: 20px;
     background-color: transparent;
 
     .bar {
+      z-index: -1;
       background-color: #020202;
       height: 5px;
       width: 100%;
@@ -24,8 +24,9 @@
 
   /* Estilos para el menú lateral */
   .sidebar {
-    position: fixed;
+    position: absolute;
     left: -350px;
+    padding: 20px;
     /* Inicialmente oculto */
     top: 0;
     width: 380px;
@@ -33,16 +34,15 @@
     background-color: #2b9d94;
     transition: all 0.3s ease;
     padding-top: 60px;
-    z-index: 50;
 
     &.show {
       left: 0;
-      /* Muestra el menú */
     }
 
     .sidebar-item {
-      display: block;
-      color: #fff;
+      display: flex;
+      color: #fff;  
+      gap: 10px;
       padding: 15px;
       text-decoration: none;
       font-size: 18px;

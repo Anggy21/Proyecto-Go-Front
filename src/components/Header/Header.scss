@@ -1,23 +1,24 @@
 .header {
   height: 70px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
   background-color: #f4f4f4;
   border-bottom: 1px solid #ddd;
+  justify-content: space-between;
 
   .header-title {
-    display: flex;
-    align-items: center;
+    background-color: #f4f4f4;
+    display:flex;
+    justify-content: space-between;
+    margin: 0;
 
     h1 {
-      margin-right: 1550px;
-
+      margin: 0;
+      margin-left: 5%;
+      padding: 20px;
+      position: relative;
     }
 
     .notification {
-      margin-right: 20px;
+      margin-right:2% ;
       background: none;
       border: none;
       font-size: 2.3em;
@@ -44,7 +45,7 @@
   }
 
   .notifications-dropdown {
-    position: absolute;
+    position:fixed;
     display: flex;
     flex-direction: column;
     top: 70px;
@@ -54,6 +55,7 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     width: 28%;
     z-index: 100;
+    right: 0;
 
     button {
       margin-bottom: 5px;
