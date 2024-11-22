@@ -30,7 +30,7 @@ function SideBar() {
         <Link to="/view-invoices" className="sidebar-item">
           <span className="icon">💵</span> Ver Facturas
         </Link>
-        <Link to="/reminders" className="sidebar-item">
+        <Link to="/dashboard" className="sidebar-item">
           <span className="icon">📊</span> Dashboard
         </Link>
         <Link to="/logout" className="sidebar-item">

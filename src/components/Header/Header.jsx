@@ -28,7 +28,6 @@ function Header() {
     if(data.length > notificationCount){
       window.localStorage.setItem("notificationOpened", "false");
       setNewNotifications(data.length - notificationCount);
-      console.log(newNotifications);
     }
   }
 

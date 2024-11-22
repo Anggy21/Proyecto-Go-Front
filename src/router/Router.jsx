@@ -6,6 +6,7 @@ import Login from '../views/Login/Login';
 import PaymentHistory from '../views/PaymentHistory/PaymentHistory';
 import NextPayments from '../views/NextPayments/NextPayments';
 import Logout from '../views/Logout/Logout';
+import Dashboard from '../views/Dashboard/Dashboard';
 
 const ProtectedRoute = ({ element }) => {
     const navigate = useNavigate();
@@ -49,6 +50,10 @@ const Router = () => {
                 <Route
                     path="/view-invoices"
                     element={<ProtectedRoute element={<NextPayments />} />}
+                />
+                <Route
+                    path="/dashboard"
+                    element={<ProtectedRoute element={<Dashboard />} />}
                 />
                 <Route path="/logout" element={<ProtectedRoute element={<Logout />} />} />
             </Routes>
